@@ -39,5 +39,16 @@ public class StockItemControllerTest {
             mockMvc.perform(get("/stock-items").accept("application/json"))
                     .andExpect(content().json("[]"));
         }
+
+        @Test
+        @DisplayName("When called then it should return the results of the StockItemService")
+        public void when_called_then_return_the_results_of_the_stockitemservice() throws Exception {
+            final List<StockItem> expectedResult = Arrays.asList(new StockItem());
+            when(service.listStockItems()).thenReturn(expectedResult);
+            mockMvc.perform(get("/stock-items").accept("application/json"))
+                    .andExpect(content().json("[{}]"));
+        }
+
+
     }
 }
